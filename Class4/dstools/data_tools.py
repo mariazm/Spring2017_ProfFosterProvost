@@ -34,7 +34,10 @@ def Decision_Surface(data, target, model, surface=True, probabilities=False, cel
     plt.xlabel("humor")
     plt.ylabel("number_pets")
     if surface and model != None:
-        cs = plt.contourf(xx, yy, Z, cmap=plt.cm.coolwarm, alpha=0.4)
+        if probabilities:
+            cs = plt.contourf(xx, yy, Z,cmap=plt.cm.coolwarm, alpha=0.4)
+        else:
+            cs = plt.contourf(xx, yy, Z, levels=[-1,0,1],cmap=plt.cm.coolwarm, alpha=0.4)
     color = ["blue" if t == 0 else "red" for t in target]
     plt.scatter(data[data.columns[0]], data[data.columns[1]], color=color)
 
