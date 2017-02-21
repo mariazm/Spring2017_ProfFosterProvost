@@ -4,16 +4,16 @@ import pandas as pd
 import matplotlib.pylab as plt
 
 def Decision_Surface(data, target, model, surface=True, probabilities=False, cell_size=.01):
-	'''
+    '''
     This function creates the surface of a decision tree using the data created with this script. 
     You can change this function tu plot any column of any dataframe. 
     
     INPUT: data (created with data_tools.X() ),
-    	   target (Y value creted with data_tools.create_data() ),
-    	   model (Model already fitted with X and Y , i.e. DecisionTreeClassifier or logistic regression )
-    	   surface (True if we want to display the tree surface),
-    	   probabilities (False by default, if True we can see the color-scale based on the likelihood of being closer to the separator),
-    	   cell_size (value for the step of the numpy arange that creates the mesh)
+            target (Y value creted with data_tools.create_data() ),
+            model (Model already fitted with X and Y , i.e. DecisionTreeClassifier or logistic regression )
+            surface (True if we want to display the tree surface),
+            probabilities (False by default, if True we can see the color-scale based on the likelihood of being closer to the separator),
+           cell_size (value for the step of the numpy arange that creates the mesh)
 
     RETURNS: Scatterplot with/without the surface
     '''
@@ -41,7 +41,7 @@ def Decision_Surface(data, target, model, surface=True, probabilities=False, cel
     
     # Plot mesh and data
     if data.shape[1] > 2:
-    	# Higher orders
+        # Higher orders
         plt.title("humor^(" + str(range(1,data.shape[1])) + ") and number_pets")
     else:
         plt.title("humor and number_pets")
@@ -49,16 +49,16 @@ def Decision_Surface(data, target, model, surface=True, probabilities=False, cel
     plt.ylabel("number_pets")
     if surface and model != None:
         if probabilities:
-        	# Color-scale on the contour (surface = separator)
+            # Color-scale on the contour (surface = separator)
             cs = plt.contourf(xx, yy, Z,cmap=plt.cm.coolwarm, alpha=0.4)
         else:
-        	# Only a curve/line on the contour (surface = separator)
+            # Only a curve/line on the contour (surface = separator)
             cs = plt.contourf(xx, yy, Z, levels=[-1,0,1],cmap=plt.cm.coolwarm, alpha=0.4)
     color = ["blue" if t == 0 else "red" for t in target]
     plt.scatter(data[data.columns[0]], data[data.columns[1]], color=color)
 
 def create_data():
-	'''
+    '''
     This function creates a data set with 3 random normal distributions scaled. 
     There are two main variables in this dataset: humor and number_pets.
     It also computes higher orders for the 'humor' variable (^2, ^3 and ^4).
@@ -68,7 +68,7 @@ def create_data():
     RETURNS: target_name (always "success"), 
              variable_names (always ["humor", "number_pets"] ), 
              data  (dataframe with the data WITHOUT higher orders), 
-             data_target (target variable with values 0 or 1)
+             Y (target variable with values 0 or 1)
     '''
     # Set the randomness
     np.random.seed(36)
@@ -98,14 +98,15 @@ def create_data():
     data['humor^4'] = np.power(data['humor'], 4)
 
     data[target_name] = target
-    return target_name, variable_names, data, target
+    Y = data[target_name]
+    return target_name, variable_names, data, Y
 
 def X(complexity=1):
-	'''
+    '''
     This function return the X-data from the 'create_data' function of this script.
     You can change the complexity to receive the main 2 columns + complex orders.
-	
-	INPUT: complexity (higher complexity (1 to 4) for the 'humor' variable)
+    
+    INPUT: complexity (higher complexity (1 to 4) for the 'humor' variable)
 
     RETURNS: data  (dataframe with the data WITH higher orders IF required)
     '''
@@ -114,7 +115,7 @@ def X(complexity=1):
     
     # if complexity = 1 then we just need to drop all the higher order from the dataframe
     for i in [2, 3, 4]:
-    	# based on the number of complexity required, we drop the rest of the higher orders
+        # based on the number of complexity required, we drop the rest of the higher orders
         if i > complexity:
             drops.append("humor^" + str(i))
     
