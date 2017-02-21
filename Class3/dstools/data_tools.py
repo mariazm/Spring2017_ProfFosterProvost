@@ -17,7 +17,6 @@ def Decision_Surface(data, target, model, surface=True, probabilities=False, cel
 
     RETURNS: Scatterplot with/without the surface
     '''
-
     # Get bounds, we only have 2 columns in the dataframe: column 0 and column 1 
     x_min, x_max = data[data.columns[0]].min(), data[data.columns[0]].max()
     y_min, y_max = data[data.columns[1]].min(), data[data.columns[1]].max()
@@ -71,7 +70,6 @@ def create_data():
              data  (dataframe with the data WITHOUT higher orders), 
              data_target (target variable with values 0 or 1)
     '''
-
     # Set the randomness
     np.random.seed(36)
 
@@ -111,7 +109,6 @@ def X(complexity=1):
 
     RETURNS: data  (dataframe with the data WITH higher orders IF required)
     '''
-
     # remove the target variable
     drops = ["success"]
     
