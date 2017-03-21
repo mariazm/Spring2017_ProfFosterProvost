@@ -1,0 +1,177 @@
+#The only pattern I can see from the random sample of 20 rides is the rides that occurred later into the evening had more passengers as compared to rides during the day. 
+|
+code:df1.corr()
+|
+code:np.unique(trips['dropoff_borough'])
+|
+#Pattern found: 1. The dropoff borough is always brooklyn. The correlation value for dropoff borough is always NaN which indicates
+#that the standard deviation of dropoff borough is zero which means it has the same value.
+# 2. The correlation value between dropoff zipcode and dropoff datetime is 0.985 which means dropoff zipcode and dropoff datetime 
+#are almost linearly dependent on each other.
+|
+code:sample_df.dropoff_datetime.unique()
+|
+#Drop-offs occured between 3/1/15 - 3/29/15
+#Most drop-offs occur between hours of 17:00:00 - 23:00:00
+|
+#The dropoff borough is either Brooklyn or None.
+|
+code:print(trips.groupby('dropoff_borough').count())
+|
+#patterns identified
+#the dropoff borough is always brooklyn
+#the tip amount is always $0.3
+|
+#The sample contains only dropoffs in Brooklyn during March 2015. Running the random sample several times has returned the same results, suggesting that the data set as a whole may only report on rides that share these characteristics.
+|
+#When looking at data in the dropoff_datetime column, we see that the data correspond to rides in the month of March, 2015.  There doesn’t appear to be a specific date or a time that is more prevalent than others.
+|
+#The most common dropoff ZIP code is 11201, with 5 records accounting for 25% of our set.  Second most common is 11206, with 3 records (15%), and the remainder have one or two records spread over the remaining 8 ZIP codes in this random sample.
+|
+# The data predominantely is from March 2015 and almost all the drop-offs seem to be in Brooklyn
+|
+#I created a new column to indicate the time of day the travel took place,
+#4am-4pm being daytime, and tried to find a pattern based on that. 
+#One pattern that I noticed could be, people travelling to zipcode 11201 tend to 
+#do so at night time.
+|
+code:samp["is_daytime"] = (( (pd.to_datetime(trips[‘dropoff_datetime']).dt.hour) <16 ) & ((pd.to_datetime(trips[‘dropoff_datetime']).dt.hour) >4 ))
+|
+code:cabs_df['pickup_datetime']= pd.to_datetime(cabs_df['pickup_datetime'])
+|
+code:cabs_df['dropoff_zip_code'].replace(regex=True,inplace=True,to_replace=r'\D',value=r'')
+|
+cabs_df["pickup_borough"] = pd.Categorical(cabs_df["pickup_borough"])
+|
+#This analysis makes sense. Starting at 4 during rush hour the volume of passengers picks
+up until midnight which is what we expect.
+|
+#We can clearly see from the data that most pick-ups occur in Manhattan with all drop-offs
+in Brooklyn.
+|
+# The pickups, on the other hand, can be from any of the boroughs and are not limited to Brooklyn.
+|
+firstplot = sample.plot(kind='scatter',
+x='pickup_longitude',
+y='pickup_latitude',
+color='DarkBlue',
+label='Pickup Location')
+secondplot = sample.plot(kind='scatter',
+x='dropoff_longitude',
+y='dropoff_latitude',
+color='Red',
+label = 'Dropoff Location',
+ax = firstplot)
+|
+## the datetimes are all in March and the dropoffs are all in Brooklyn (or None)
+|
+# 1. All dropoff_borough desinations are Brooklyn
+# 2. All dropoff_datetime are in the month of March in the year 2015 (March 2015)
+# 3. All dropoff_latitiude seem to be 40 degrees (which is approximately the mean as well)
+|
+# On average, total amount is trip_distance multiplied by amount per unit distance. This rate is between 3-5 units. 
+|
+code:sample_trips.groupby('dropoff_zip_code')['trip_distance', 'total_amount', 'tip_amount'].mean()
+|
+# trips are from the month of March in 2015, all dropoff are in Brooklyn
+|
+code:print ([min(sample.pickup_datetime), max(sample.pickup_datetime)])
+|
+# I found that the dropoff_borough has only two results which are 'Brooklyn' and 'None'
+# And the records which's dropoff_borough is 'None' seem to have issue recording the pickup and dropoff locations 
+|
+The patterns that are observable are that the dropoff_borough is always Brooklyn. Sign the dropoff is Brooklyn, this aligns with the very close longitude and latitude points
+|
+#This file appears to contain only taxi drop-offs in March of 2015, only dropping off in Brooklyn.
+|
+code:trips_zip = trips_dropoff.groupby('dropoff_zip_code').count() 
+|
+#Extracting only the Date, we observe that the samples have the same year and month - 03/2015 even though the exact dates differ
+|
+#From the sample: The longest and shortest trips have fewer passengers and the ones in the middle have more passengers. 
+|
+code:trips.sample(n=20).sort_values(by = 'dropoff_datetime')
+|
+append: Appends object at end.[1, 2, 3, [4, 5]]
+|
+extend: Extends list by appending elements from the iterable.[1, 2, 3, 4, 5]
+|
+# the majority of dropoff times were either during the morning and the evening, with few trips during the day. 
+|
+code:dframe = dframe.replace({'\t': ''}, regex=True)
+|
+#""""" In the first step, upon describing patterns we observe that the dropoff_borough has one unique entry with a count of 20
+#effectively suggesting that all the destinations are in one borough, which in this case is BROOKLYN, while at this point in time 
+#the dropoff_datetime has all distinct entities, while the dropoff_zip_code suggests that there are some areas where multiple 
+#dropoffs have taken place, considering that of the 20 entries, 12 are unique"""""
+|
+code:trips.describe()
+|
+code:import dateutil.parser dateutil.parser.parse(b).date()
+|
+# Converted dates into date-time form to extract unique months, years and days. We can see that the data we got in the random set reflects dropp offs for the year 2015 and in particular the month of March
+|
+code:trips.dropoff_borough.unique()
+|
+# The dropoff_borough of each trip was Brooklyn, hence all the dropoff_zip_codes start with 112
+|
+code:pd.to_datetime(sampleset[‘dropoff_datetime'], format='%Y-%m-%d %H:%M:%S')
+|
+code:smallset.sort_values(by='distance')
+|
+# Observed that trips with the longest distance occurred during high peak times, either early AM hours (possible airport trips or daily commutes), or afternoon hours between 4 and 10 pm. Other times (off-peak) had shorter durations and resulting lower trip amounts
+|
+# Trips from Manhattan appear to occur most frequently early and late in the day. This makes sense, since people are likely commuting.
+|
+code: pd.concat(trips).filter(like='dropoff')
+|
+#As might be expected, the trip times (or the difference between dropoff and pickup) tend to be longer
+#during rush-hour as opposed to trips occuring at off-peak hours
+|
+code:trips.head(20).sort_values(['pickup_datetime','dropoff_datetime'])
+|
+code:smallset['dropoff_zip_cleaned'] = smallset.dropoff_zip_code.str[0:5]
+|
+code:trips.loc[np.random.choice(trips.index, 20, replace=False)]
+|
+## Several samples of 0 tips for brooklyn to brooklyn. Surprisingly, no samples of trips from manhattan to manhattan. 
+|
+code:trips.sample(20)
+|
+code:df2['_dropoff_zip_code']=pd.to_numeric(df2['dropoff_zip_code'])
+|
+code:print (sample.groupby('dropoff_borough').count())
+|
+# trips are from the month of March in 2015, all dropoff are in Brooklyn
+|
+#The dropoff_borough has only one value and that is Brooklyn. Thus, this file contains records of all the trips with destination Brooklyn. We can also conclude that all the pickup_datetime and dropoff_datetime are for March 2015. Hence, this file contains all the trips that have Brooklyn as the destination for the month of March in 2015.
+|
+code: pd.value_counts(rando['dropoff_borough'])
+|
+code: trips[['dropoff_borough']].drop_duplicates()
+|
+code: df2['_dropoff_datetime']=pd.to_datetime(df2['dropoff_datetime'])
+|
+code: df2['_dropoff_zip_code']=pd.to_numeric(df2['dropoff_zip_code'])
+|
+code: df2['_day_of_week']=df2['_dropoff_datetime'].dt.weekday_name
+|
+# All dropoffs in sample happened in Brooklyn
+|
+# In the sample, dropoffs are most common on Sunday, followed by Friday
+|
+code: sample['dropoff_borough'].value_counts()
+|
+# It seems they are all dropped off in Brooklyn. Maybe we can map out their pickup and
+dropoff location
+|
+# Starting at 4 during rush hour the volume of passengers picks
+up until midnight which is what we expect.
+|
+code: sample[['dropoff_datetime', 'passenger_count']].groupby(lambda idx: idx.hour).agg(sum)
+|
+
+
+
+
+
