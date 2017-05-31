@@ -15,7 +15,9 @@ The basic libraries required for the notebooks are: pandas, numpy, datetime, os,
 
 ## Contributors
 
-Prof Foster Provost - NYU Stern School of Business [website](http://people.stern.nyu.edu/fprovost/)
-MSDS Maria Leonor Zamora Maass [contact](mzm239@nyu.edu)
+Prof Foster Provost - NYU Stern School of Business [Website](http://people.stern.nyu.edu/fprovost/)
+
+MSDS Maria Leonor Zamora Maass [Contact](https://www.linkedin.com/in/marialzamora/)
+
 Acknowledgment: Rob Moakler, NYU Stern Ph.D. 
 
