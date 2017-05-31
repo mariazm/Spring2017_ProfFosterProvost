@@ -1,6 +1,6 @@
 ## Introduction
 
-This repository includes 8 modules with Ipython Notebooks created for the Introduction to Data Science Class. Each module includes data, code and description of each task within the Data Science Framework.
+This repository includes 8 modules with Ipython Notebooks created for the Introduction to Data Science Class (NYU Stern School of Business, Spring 2017). Each module includes data, code and description of each task within the Data Science Framework.
 
 
 ## Motivation
