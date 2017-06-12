@@ -19,5 +19,4 @@ Prof Foster Provost - NYU Stern School of Business [Website](http://people.stern
 
 MSDS Maria Leonor Zamora Maass [Contact](https://www.linkedin.com/in/marialzamora/)
 
-Acknowledgment: Rob Moakler, NYU Stern Ph.D. 
-
+Initial fork from Rob Moakler, NYU Stern Ph.D. [Github link](https://github.com/rmoakler/learning-data-science/tree/master/Fall%202015)
